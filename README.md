@@ -1,12 +1,13 @@
-Le TP3 de notre cours de dévellopement web.
+Le TP3 de notre cours de développement web.
 Prérequis :
-- Un pose Linux
-- Configuration de apache2
+- Un poste Linux
+- Configuration d'apache2
 - Configuration de MySql
+- Une application de gestion de base de données
 
-Ce TP permet d'ajouter,supprimer,valider un element d'une liste stocké sur une bdd MySql :
+Ce TP permet d'ajouter, supprimer, valider un element d'une liste stocké sur une bdd MySql :
 
-Pour l'installation de l'application il faut créer une base de donnée MySql.
+Pour l'installation de l'application il faut créer une base de données MySql.
 Sur cette base exécuté le code sql contenue dans le fichier TP3.sql.
 
 Dans le fichier index.php modifier la ligne 3 pour la connexion a la base :
