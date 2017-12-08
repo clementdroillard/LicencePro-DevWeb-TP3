@@ -1,1 +1,3 @@
-Cette page github regroupe les différents tp du cours de dévellopement Web de licence Pro 
+Le TP3 de notre cours de dévellopement web. Ce TP permet d'ajouter et supprimer un element d'une liste stocké sur une bdd MySql :
+
+
