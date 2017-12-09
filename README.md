@@ -7,6 +7,9 @@ Prérequis :
 
 Ce TP permet d'ajouter, supprimer, valider un element d'une liste stocké sur une bdd MySql :
 
+Pour télécharger les fichiers :
+https://github.com/clementdroillard/LicenceProDevWebTP3/archive/master.zip
+
 Pour l'installation de l'application il faut créer une base de données MySql.
 Sur cette base exécuté le code sql contenue dans le fichier TP3.sql.
 
