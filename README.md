@@ -1,6 +1,6 @@
 Le TP3 de notre cours de développement web.
 Prérequis :
-- Un poste Linux
+- Un poste Linux / serveur web 
 - Configuration d'apache2
 - Configuration de MySql
 - Une application de gestion de base de données
