@@ -1,7 +1,9 @@
  <?php
- 	//connexion a notre base de donnée
+ 	require 'vendor/autoload.php';
+ 	Mustache_Autoloader::register();
+ 	//connexion a notre base de donnÃ©e
  	$dbh = new PDO('mysql:host=localhost;dbname=TP3','root','rt2018');
- 	//on vérifie si il y a eu une saisie et qu'elle ne soit pas vide
+ 	//on vÃ©rifie si il y a eu une saisie et qu'elle ne soit pas vide
  	if(isset($_POST["value"]) && $_POST["value"] != '')
  	{
  		$insert = true;
@@ -14,16 +16,17 @@
  	//la saisie est vide ou il y a pas de saisie
  	else
  	{
+ 		$valeur = "";
  		$insert = false;
  	}
- 	//on vérifie si on a cliqué sur le bouton supprimer
- 	if(isset($_POST["supprimer"])){
+ 	//on vÃ©rifie si on a cliquÃ© sur le bouton supprimer
+ 	if(isset($_POST["supprimer"]) && is_numeric($_POST["idSuppr"])){
  		$id = $_POST["idSuppr"];
- 		//on supprime la saisie souhaité
+ 		//on supprime la saisie souhaitÃ©
  		$sql= 'DELETE FROM saisie WHERE id ='.$id;
  		$dbh->exec($sql);
  	}
- 	//on vérifie si on a cliqué sur le bouton valider
+ 	//on vÃ©rifie si on a cliquÃ© sur le bouton valider
  	if(isset($_POST["valider"])){
  		$id = $_POST["idSuppr"];
  		$valider = $_POST["valValider"];
@@ -35,47 +38,13 @@
  	}
  	//la variable saisies prend les valeurs de la table saisie 
  	$saisies = $dbh->query('select id,libelle,valider from saisie');
+
+ 	
+	$m = new Mustache_Engine(array(
+    	'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/views'),
+	));
+ 	echo $m->render('liste' ,array('saisies'=>$saisies,'insert'=>$insert, 'valeur'=>$valeur ));
+
  ?>
 
 
-
-<!doctype html>
-<html lang="fr">
-	<head>
-	  <meta charset="utf-8">
-	</head>
-	<body>
-	 	<h1>To do list</h1>
-	 	<ul>
-		 	<?php
-		 		//on parcours la variable saisies 
-		 		foreach ($saisies as $value): 
-		 	?>
-		 	<!-- formulaire qui contient la liste et le bouton supprimer et valider-->
-		 	<form name=suppr action="index.php" method="post">
-		 		<li>
-		 			<?php if($value['valider']): ?> <strike> <?php endif; ?>
-		 			"<?= $value['libelle'] ?>"
-		 			<?php if($value['valider']): ?> </strike> <?php endif; ?>
-		 			<input type="hidden" name ="idSuppr" value=<?= $value['id'] ?> />
-		 			<input type="submit" name ="supprimer" value="Supprimer" />
-		 			<input type="hidden" name ="valValider" value=<?= $value['valider'] ?> />
-		 			<input type="submit" name ="valider" value="Valider / Non Valider" />	
-		 		</li>
-		 	</form>
-		 	<?php endforeach; ?>
-	 	</ul>
-	 	<h1>Ajouter un élement à la liste : </h1>
-	 	<!-- si on vient d'insérer une valeur on l'affiche sinon on dit que rien n'est saisie-->
-	 	<?php if($insert): ?>
-	 		Vous avez saisie <?= $valeur ?>
-	 	<?php else: ?>
-	 		Vous n'avez rien saisie
-	 	<?php endif; ?>
-	 	<!-- formulaire d'ajout -->
-	 	<form action="index.php" method="post">
-	 		<p>Votre saisie : <input type="text" name="value" /></p>
-	 		<p><input type="submit" value="OK" /></p>
-		</form>
-	</body>
-</html>
