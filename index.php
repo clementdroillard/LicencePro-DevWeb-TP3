@@ -1,9 +1,14 @@
  <?php
+
  	require 'vendor/autoload.php';
  	Mustache_Autoloader::register();
  	//connexion a notre base de donnÃ©e
  	$dbh = new PDO('mysql:host=localhost;dbname=TP3','root','rt2018');
  	//on vÃ©rifie si il y a eu une saisie et qu'elle ne soit pas vide
+
+ 	//connexion a notre base de donnée
+ 	$dbh = new PDO('mysql:host=localhost;dbname=TP3','root','lpdip:17');
+ 	//on vérifie si il y a eu une saisie et qu'elle ne soit pas vide
  	if(isset($_POST["value"]) && $_POST["value"] != '')
  	{
  		$insert = true;
@@ -27,6 +32,16 @@
  		$dbh->exec($sql);
  	}
  	//on vÃ©rifie si on a cliquÃ© sur le bouton valider
+ 		$insert = false;
+ 	}
+ 	//on vérifie si on a cliqué sur le bouton supprimer
+ 	if(isset($_POST["supprimer"])){
+ 		$id = $_POST["idSuppr"];
+ 		//on supprime la saisie souhaité
+ 		$sql= 'DELETE FROM saisie WHERE id ='.$id;
+ 		$dbh->exec($sql);
+ 	}
+ 	//on vérifie si on a cliqué sur le bouton valider
  	if(isset($_POST["valider"])){
  		$id = $_POST["idSuppr"];
  		$valider = $_POST["valValider"];
@@ -37,14 +52,11 @@
  		$dbh->exec($sql);
  	}
  	//la variable saisies prend les valeurs de la table saisie 
- 	$saisies = $dbh->query('select id,libelle,valider from saisie');
-
- 	
+ 	$saisies = $dbh->query('select id,libelle,valider from saisie');	
 	$m = new Mustache_Engine(array(
     	'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/views'),
 	));
  	echo $m->render('liste' ,array('saisies'=>$saisies,'insert'=>$insert, 'valeur'=>$valeur ));
 
  ?>
-
 
