@@ -2,6 +2,9 @@
 <html lang="fr">
 	<head>
 	  <meta charset="utf-8">
+	   <link rel="stylesheet" href="styles/style.css">
+	  <script src="scripts/script.js"></script>
+	  <title>ToDoList</title>
 	</head>
 	<body>
 	 	<h1>To do list</h1>
@@ -9,28 +12,27 @@
 		 	
 		 		<!-- //on parcours la variable saisies -->
 		 	{{#saisies}}
-			 	<!-- formulaire qui contient la liste et le bouton supprimer et valider-->
-			 	<form name=suppr action="index.php" method="post">
-			 		<li>
+			 	<!-- la liste et le bouton supprimer et valider-->
+			 		<li id =li{{id}}>
 			 			{{#valider}}
-			 				<strike> 
+			 				<strike id=strike{{id}}> 
 			 			{{/valider}}
-
-			 			{{libelle}}
-
+			 			<p id=p{{id}}>
+			 				{{libelle}}
+			 			</p>
 			 			{{#valider}}
 			 				</strike> 
 			 			{{/valider}} 
-			 			<input type="hidden" name ="idSuppr" value={{id}}  />
-			 			<input type="submit" name ="supprimer" value="Supprimer" />
-			 			<input type="hidden" name ="valValider" value={{valider}} />
-			 			<input type="submit" name ="valider" value="Valider / Non Valider" />
 			 		</li>
-			 	</form>
+			 		<p id=boutton{{id}}>
+			 		<button id="btnSpr{{id}}" onclick="supprimer({{id}});">Supprimer</button>
+			 		<button id="btnVal{{id}}" onclick="valider({{id}});">Valider / Non Valider</button> 
+			 		<br/>
+			 		</p>
 		 	{{/saisies}}
 	 	</ul>
 	 	<h1>Ajouter un Element à la liste : </h1>
-	 	<!-- si on vient d'insÃ©rer une valeur on l'affiche sinon on dit que rien n'est saisie-->
+	 	<!-- si on vient d'insÃƒÂ©rer une valeur on l'affiche sinon on dit que rien n'est saisie-->
 	 	{{#insert}}
 	 		Vous avez saisie {{valeur}}
 	 	{{/insert}}
@@ -38,9 +40,7 @@
 	 		Vous n'avez rien saisie
 	 	{{/insert}}
 	 	<!-- formulaire d'ajout --> 
-	 	<form action="index.php" method="post">
-	 		<p>Votre saisie : <input type="text" name="value" /></p>
-	 		<p><input type="submit" value="OK" /></p>
-		</form>
+	 		<br/><br/><p>Votre saisie : <input id="saisie" type="text" name="value" /></p>
+	 		<button onclick="ajouter();">OK</button>
 	</body>
 </html>

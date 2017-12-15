@@ -2,12 +2,9 @@
 
  	require 'vendor/autoload.php';
  	Mustache_Autoloader::register();
- 	//connexion a notre base de donnÃ©e
- 	$dbh = new PDO('mysql:host=localhost;dbname=TP3','root','rt2018');
- 	//on vÃ©rifie si il y a eu une saisie et qu'elle ne soit pas vide
+ 	 //connexion a notre base de donnÃ©e
+ 	include("connexion.php");
 
- 	//connexion a notre base de donnée
- 	$dbh = new PDO('mysql:host=localhost;dbname=TP3','root','lpdip:17');
  	//on vérifie si il y a eu une saisie et qu'elle ne soit pas vide
  	if(isset($_POST["value"]) && $_POST["value"] != '')
  	{
@@ -31,8 +28,10 @@
  		$sql= 'DELETE FROM saisie WHERE id ='.$id;
  		$dbh->exec($sql);
  	}
+ 	else{
  	//on vÃ©rifie si on a cliquÃ© sur le bouton valider
  		$insert = false;
+ 		$valeur = "";
  	}
  	//on vérifie si on a cliqué sur le bouton supprimer
  	if(isset($_POST["supprimer"])){
@@ -59,4 +58,3 @@
  	echo $m->render('liste' ,array('saisies'=>$saisies,'insert'=>$insert, 'valeur'=>$valeur ));
 
  ?>
-
