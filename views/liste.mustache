@@ -8,7 +8,7 @@
 	</head>
 	<body>
 	 	<h1>To do list</h1>
-	 	<ul>
+	 	<ul id =ul>
 		 	
 		 		<!-- //on parcours la variable saisies -->
 		 	{{#saisies}}
@@ -33,12 +33,7 @@
 	 	</ul>
 	 	<h1>Ajouter un Element à la liste : </h1>
 	 	<!-- si on vient d'insÃƒÂ©rer une valeur on l'affiche sinon on dit que rien n'est saisie-->
-	 	{{#insert}}
-	 		Vous avez saisie {{valeur}}
-	 	{{/insert}}
-	 	{{^insert}}
-	 		Vous n'avez rien saisie
-	 	{{/insert}}
+	 	<p id=infoSaisie>Vous n'avez rien saisie</p>
 	 	<!-- formulaire d'ajout --> 
 	 		<br/><br/><p>Votre saisie : <input id="saisie" type="text" name="value" /></p>
 	 		<button onclick="ajouter();">OK</button>

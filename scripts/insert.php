@@ -11,14 +11,20 @@
  		if($dbh->exec($sql))
  		{
  			http_response_code(200);
+ 			$id = $dbh->query('SELECT MAX(id) FROM saisie');
+ 			foreach ($id as $value) {
+ 				echo $value['MAX(id)'];
+ 			}
  		}
  		else
  		{
  			http_response_code(503);
  		}
+ 	}
  	else
  	{
  		http_response_code(500);
  	}
+
 
  ?>

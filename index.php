@@ -55,6 +55,6 @@
 	$m = new Mustache_Engine(array(
     	'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/views'),
 	));
- 	echo $m->render('liste' ,array('saisies'=>$saisies,'insert'=>$insert, 'valeur'=>$valeur ));
+ 	echo $m->render('liste' ,array('saisies'=>$saisies));
 
  ?>
