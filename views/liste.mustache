@@ -1,41 +1,64 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	  <meta charset="utf-8">
-	   <link rel="stylesheet" href="styles/style.css">
-	  <script src="scripts/script.js"></script>
-	  <title>ToDoList</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>ToDoList</title>
+		<link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Open+Sans+Condensed:300,700" rel="stylesheet" />
+		<link href="styles/default.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="styles/fonts.css" rel="stylesheet" type="text/css" media="all" />
+		<script src="scripts/script.js"></script>
 	</head>
 	<body>
-	 	<h1>To do list</h1>
-	 	<ul id =ul>
-		 	
-		 		<!-- //on parcours la variable saisies -->
-		 	{{#saisies}}
-			 	<!-- la liste et le bouton supprimer et valider-->
-			 		<li id =li{{id}}>
-			 			{{#valider}}
-			 				<strike id=strike{{id}}> 
-			 			{{/valider}}
-			 			<p id=p{{id}}>
-			 				{{libelle}}
-			 			</p>
-			 			{{#valider}}
-			 				</strike> 
-			 			{{/valider}} 
-			 		</li>
-			 		<p id=boutton{{id}}>
-			 		<button id="btnSpr{{id}}" onclick="supprimer({{id}});">Supprimer</button>
-			 		<button id="btnVal{{id}}" onclick="valider({{id}});">Valider / Non Valider</button> 
-			 		<br/>
-			 		</p>
-		 	{{/saisies}}
-	 	</ul>
-	 	<h1>Ajouter un Element à la liste : </h1>
-	 	<!-- si on vient d'insÃƒÂ©rer une valeur on l'affiche sinon on dit que rien n'est saisie-->
-	 	<p id=infoSaisie>Vous n'avez rien saisie</p>
-	 	<!-- formulaire d'ajout --> 
-	 		<br/><br/><p>Votre saisie : <input id="saisie" type="text" name="value" /></p>
-	 		<button onclick="ajouter();">OK</button>
+		<div id="logo" class="container">
+			<h1><span class="icon icon-list-ol icon-size"></span><a href=""><span>To do list</span></a></h1>
+		</div>
+		<div id="wrapper" class="container">
+			<div id="three-column" class="container">
+				<div><span class="arrow-down"></span></div>
+					<ul id =ul class="list-group">
+				 		{{! on parcours la variable saisies }}
+					 	{{#saisies}}
+						 	{{! le nom de l element }} 
+						 		<li id =li{{id}} class="list-group-item">
+						 			<span  id=element{{id}}>
+							 			{{#valider}}
+							 				<strike id=strike{{id}} style="font-size: xx-large;"> 
+							 			{{/valider}}
+							 			<span id=lib{{id}} style="font-size: x-large;">
+							 				{{libelle}}
+							 			</span>
+							 			{{#valider}}
+							 				</strike> 
+							 			{{/valider}} 
+						 			</span>
+							 		{{! les boutons  }} 
+							 		<span id=boutton{{id}}>
+							 			<button id="btnSpr{{id}}" onclick="supprimer({{id}});">Supprimer</button>
+							 			<button id="btnVal{{id}}" onclick="valider({{id}});">Valider / Non Valider</button> 
+							 		</span>
+						 		</li>
+					 	{{/saisies}}
+			 	</ul>
+			</div>
+			<div id="portfolio" class="container">
+				<div><span class="arrow-down"></span></div>
+				<div class="title">
+					<h2>Ajouter un Element à la liste :</h2>
+				</div>
+				 	{{! si on vient d'inserer une valeur on l'affiche sinon on dit que rien n'est saisie }} 
+				 	<span id=infoSaisie>Vous n'avez rien saisie</span>
+				 	{{! formulaire d'ajout }} 
+				 	<br/><br/><br/><p>Votre saisie : <input id="saisie" type="text" name="value" /></p>
+				 	<button onclick="ajouter();">OK</button>
+
+
+					<div class="actions"> <a href="#" class="button button-big">Get Started</a> <a href="#" class="button button-big button-alt">Learn More</a> </div>
+				
+			</div>
+		</div>
 	</body>
 </html>

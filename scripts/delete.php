@@ -1,11 +1,12 @@
  <?php
- 	//connexion a notre base de donnÃ©e
+ 	//connexion a notre base de donnee
  	include("../connexion.php");
- 	//on vÃ©rifie si on a cliquÃ© sur le bouton supprimer
+ 	//on verifie si on a cliquee sur le bouton supprimer
  	if(isset($_POST["del"]) && is_numeric($_POST["del"])){
  		$id = $_POST["del"];
- 		//on supprime la saisie souhaitÃ©
+ 		//on supprime la saisie souhaitee
  		$sql= 'DELETE FROM saisie WHERE id ='.$id;
+ 		// on revoie le bon code http
  		if($dbh->exec($sql)){
  			http_response_code(200);
  		}
