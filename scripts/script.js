@@ -83,9 +83,10 @@ function ajouter()
 			var id = xhr.responseText;
 			id = id.trim();
 			var ul = document.getElementById("ul");
-			ul.innerHTML += "<li id =li"+id+" class=\"list-group-item\"><span  id=element"+id+"><span id=lib"+id+" style=\"font-size: x-large;\">"+saisie+"</span></span><span id=boutton"+id+"><button id=\"btnSpr"+id+"\" onclick=\"supprimer("+id+");\">Supprimer</button><button id=\"btnVal"+id+"\" onclick=\"valider("+id+");\">Valider / Non Valider</button></span></li>";
+			ul.innerHTML += "<li id =li"+id+" class=\"list-group-item\"><span  id=element"+id+"><span id=lib"+id+" style=\"font-size: x-large;\">"+saisie+"</span></span><span id=boutton"+id+"><button id=\"btnSpr"+id+"\" class=\"btn btn-danger fa fa-trash\" onclick=\"supprimer("+id+");\" /><button id=\"btnVal"+id+"\" class=\"btn btn-success fa fa-check-square\" onclick=\"valider("+id+");\" /></span></li>";
 			document.getElementById("infoSaisie").innerHTML = "Vous avez saisie : \""+saisie+"\"";
 			document.getElementById("saisie").value = "";
+			document.location.href="#li"+id
 		}
 	};
 }

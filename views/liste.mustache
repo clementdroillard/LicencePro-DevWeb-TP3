@@ -4,6 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>ToDoList</title>
+		<link href="vendor/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 		<link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
@@ -17,7 +18,7 @@
 			<h1><span class="icon icon-list-ol icon-size"></span><a href=""><span>To do list</span></a></h1>
 		</div>
 		<div id="wrapper" class="container">
-			<div id="three-column" class="container">
+			<div id="liste" class="container">
 				<div><span class="arrow-down"></span></div>
 					<ul id =ul class="list-group">
 				 		{{! on parcours la variable saisies }}
@@ -37,27 +38,24 @@
 						 			</span>
 							 		{{! les boutons  }} 
 							 		<span id=boutton{{id}}>
-							 			<button id="btnSpr{{id}}" onclick="supprimer({{id}});">Supprimer</button>
-							 			<button id="btnVal{{id}}" onclick="valider({{id}});">Valider / Non Valider</button> 
+							 			<button id="btnSpr{{id}}" class="btn btn-danger fa fa-trash" onclick="supprimer({{id}});"/>
+							 			<button id="btnVal{{id}}" class="btn btn-success fa fa-check-square" onclick="valider({{id}});"/> 
 							 		</span>
 						 		</li>
 					 	{{/saisies}}
 			 	</ul>
 			</div>
-			<div id="portfolio" class="container">
+			<div id="insert" class="container">
 				<div><span class="arrow-down"></span></div>
 				<div class="title">
 					<h2>Ajouter un Element à la liste :</h2>
 				</div>
 				 	{{! si on vient d'inserer une valeur on l'affiche sinon on dit que rien n'est saisie }} 
-				 	<span id=infoSaisie>Vous n'avez rien saisie</span>
+				 	<span style="font-size: x-large;" id=infoSaisie>Vous n'avez rien saisie</span>
 				 	{{! formulaire d'ajout }} 
-				 	<br/><br/><br/><p>Votre saisie : <input id="saisie" type="text" name="value" /></p>
-				 	<button onclick="ajouter();">OK</button>
-
-
-					<div class="actions"> <a href="#" class="button button-big">Get Started</a> <a href="#" class="button button-big button-alt">Learn More</a> </div>
-				
+				 	<br/><br/><br/>    
+    				<input style="font-size: x-large;" id="saisie" type="text" class="form-control" name="msg" placeholder="Vous devez renseignez au moins un caractère" />
+				 	<div class="actions"><button type="button" class="btn btn-primary" style="font-size: xx-large;" onclick="ajouter();">Insérer</button></div>	
 			</div>
 		</div>
 	</body>
