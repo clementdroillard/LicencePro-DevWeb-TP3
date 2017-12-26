@@ -7,7 +7,8 @@
 
 
  	//la variable saisies prend les valeurs de la table saisie 
- 	$saisies = $dbh->query('select id,libelle,valider from saisie');	
+ 	$saisies = $dbh->query('select id,libelle,valider from saisie');
+
 	$m = new Mustache_Engine(array(
     	'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/views'),
 	));

@@ -2,10 +2,10 @@
 
   	//connexion a notre base de donnee
  	include("../connexion.php");
-
- 	if(isset($_POST["valider"]) && isset($_POST["id"]) && is_numeric($_POST["id"]) && is_numeric($_POST["valider"]) ){
- 		$id = $_POST["id"];
- 		$valider = $_POST["valider"];
+ 	parse_str(file_get_contents("php://input"),$_PUT);
+ 	if(isset($_PUT["valider"]) && isset($_PUT["id"]) && is_numeric($_PUT["id"]) && is_numeric($_PUT["valider"]) ){
+ 		$id = $_PUT["id"];
+ 		$valider = $_PUT["valider"];
  		//on change la valeur de la validation 
  		$valider = (boolval(!$valider) ? 'true' : 'false');
  		//on met cette valeur dans la bdd

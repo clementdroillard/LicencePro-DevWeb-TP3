@@ -1,6 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE>
+<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>ToDoList</title>
@@ -30,7 +29,7 @@
 							 				<strike id=strike{{id}} style="font-size: xx-large;"> 
 							 			{{/valider}}
 							 			<span id=lib{{id}} style="font-size: x-large;">
-							 				{{libelle}}
+							 				{{libelle}} 
 							 			</span>
 							 			{{#valider}}
 							 				</strike> 
@@ -38,8 +37,10 @@
 						 			</span>
 							 		{{! les boutons  }} 
 							 		<span id=boutton{{id}}>
+							 			&nbsp;&nbsp;
+							 			<button id="btnVal{{id}}" class="btn btn-success fa fa-check-square" onclick="valider({{id}});"/>
+							 			<button id="btnUpdate{{id}}" class="btn btn-warning fa fa-pencil" onclick="modifier({{id}},{{valider}});"/> 
 							 			<button id="btnSpr{{id}}" class="btn btn-danger fa fa-trash" onclick="supprimer({{id}});"/>
-							 			<button id="btnVal{{id}}" class="btn btn-success fa fa-check-square" onclick="valider({{id}});"/> 
 							 		</span>
 						 		</li>
 					 	{{/saisies}}

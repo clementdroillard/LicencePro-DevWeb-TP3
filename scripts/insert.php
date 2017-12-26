@@ -4,7 +4,7 @@
  	//on vérifie si il y a eu une saisie 
  	if(isset($_POST["insert"]))
  	{
- 		//contient la valeur qui vient d'etre saisie
+ 		//contient la valeur qui vient d'etre saisie au format html
  		$valeur =htmlspecialchars($_POST["insert"], ENT_QUOTES); 
  		//insertion de la valeur dans la base
  		$sql = 'INSERT INTO saisie(libelle,valider) VALUES(\''.$valeur.'\',false)';

@@ -3,7 +3,7 @@ function supprimer(id)
 {
 	//on envoie la requete pour supprimer
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "scripts/delete.php", true);
+	xhr.open("DELETE", "scripts/delete.php", true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("del="+id);
 
@@ -34,7 +34,7 @@ function valider(id)
 	}
 	//requete pour changer le statut de validation
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "scripts/valider.php", true);
+	xhr.open("PUT", "scripts/valider.php", true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("valider="+valider+"&id="+id);
 
@@ -46,14 +46,16 @@ function valider(id)
 				var strike = document.getElementById("strike"+id);
 				strike.parentNode.removeChild(strike);
 				liste.appendChild(libelle);
+				document.getElementById("btnUpdate"+id).setAttribute('onclick',"modifier("+id+",0)");
 			}
 			else{
 				var strike = document.createElement("strike");
 				strike.style.fontSize = "xx-large";
-				strike.id = "strike"+id
+				strike.id = "strike"+id;
 				liste.insertBefore(strike,libelle);
 				libelle.parentNode.removeChild(libelle);
 				strike.appendChild(libelle);
+				document.getElementById("btnUpdate"+id).setAttribute('onclick',"modifier("+id+",1)");
 			}
 		}
 	};
@@ -83,10 +85,64 @@ function ajouter()
 			var id = xhr.responseText;
 			id = id.trim();
 			var ul = document.getElementById("ul");
-			ul.innerHTML += "<li id =li"+id+" class=\"list-group-item\"><span  id=element"+id+"><span id=lib"+id+" style=\"font-size: x-large;\">"+saisie+"</span></span><span id=boutton"+id+"><button id=\"btnSpr"+id+"\" class=\"btn btn-danger fa fa-trash\" onclick=\"supprimer("+id+");\" /><button id=\"btnVal"+id+"\" class=\"btn btn-success fa fa-check-square\" onclick=\"valider("+id+");\" /></span></li>";
+			ul.innerHTML += "<li id =li"+id+" class=\"list-group-item\"><span  id=element"+id+"><span id=lib"+id+" style=\"font-size: x-large;\">"+saisie+"</span></span><span id=boutton"+id+">&nbsp;&nbsp;<button id=\"btnVal"+id+"\" class=\"btn btn-success fa fa-check-square\" onclick=\"valider("+id+");\" /><button id=\"btnUpdate"+id+"\" class=\"btn btn-warning fa fa-pencil\" onclick=\"modifier("+id+",0);\"/><button id=\"btnSpr"+id+"\" class=\"btn btn-danger fa fa-trash\" onclick=\"supprimer("+id+");\" /></span></li>";
 			document.getElementById("infoSaisie").innerHTML = "Vous avez saisie : \""+saisie+"\"";
 			document.getElementById("saisie").value = "";
-			document.location.href="#li"+id
+			document.location.href="#li"+id;
 		}
+	};
+}
+
+
+//clic sur le bouton modifier
+function modifier(id,valider)
+{
+	//on affiche le champ modifiacation 
+	var saisie = document.getElementById("lib"+id).innerHTML.trim();
+	var element = document.getElementById("element"+id);
+	var buttonSupr = document.getElementById("btnSpr"+id);
+	var buttonVal = document.getElementById("btnVal"+id);
+	var fonction = "validermodif("+id+","+valider+",'"+saisie+"');";
+
+	document.getElementById("btnUpdate"+id).setAttribute('onclick',fonction);
+
+	element.innerHTML = "<input style=\"font-size: x-large;\" id=\"update"+id+"\" type=\"text\" class=\"form-control\" name=\"msg\" value="+saisie+" />";
+	buttonSupr.parentNode.removeChild(buttonSupr);
+	buttonVal.parentNode.removeChild(buttonVal);
+}
+
+function validermodif(id,valider,saisieOld)
+{
+	var saisieNew = document.getElementById("update"+id).value;
+	var element = document.getElementById("element"+id);
+	var buttons = document.getElementById("boutton"+id);
+	var saisie;
+
+	//on envoie la requete pour modifier
+	var xhr = new XMLHttpRequest();
+	xhr.open("PUT", "scripts/update.php", true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send("update="+saisieNew+"&id="+id+"&old="+saisieOld);
+	//lorsque la requete est effectué
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			//requete ok
+			saisie = saisieNew;
+		}
+		else{
+			//requete ko
+			saisie = saisieOld;
+		}
+		//on enleve le champ de saisie
+		if (valider) 
+		{
+			element.innerHTML = "<strike id=strike"+id+" style=\"font-size: xx-large;\"><span id=lib"+id+" style=\"font-size: x-large;\">"+saisie+" </span></strike>";
+	 
+		}
+		else
+		{
+			element.innerHTML ="<span id=lib"+id+" style=\"font-size: x-large;\">"+saisie+"</span>";
+		}
+		buttons.innerHTML = "&nbsp;&nbsp;<button id=\"btnVal"+id+"\" class=\"btn btn-success fa fa-check-square\" onclick=\"valider("+id+");\" /><button id=\"btnUpdate"+id+"\" class=\"btn btn-warning fa fa-pencil\" onclick=\"modifier("+id+","+valider+");\"/><button id=\"btnSpr"+id+"\" class=\"btn btn-danger fa fa-trash\" onclick=\"supprimer("+id+");\" />";
 	};
 }
