@@ -6,9 +6,9 @@ function supprimer(id)
 	xhr.open("DELETE", "scripts/delete.php", true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("del="+id);
-
 	//lorsque la requete a réussi
 	xhr.onreadystatechange = function() {
+
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			//suppression de la ligne dans le html
 			var liste = document.getElementById("li"+id);
@@ -40,6 +40,7 @@ function valider(id)
 
 	//lorsque la requete est effectué
 	xhr.onreadystatechange = function() {
+
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			//on modifie le html
 			if(valider){

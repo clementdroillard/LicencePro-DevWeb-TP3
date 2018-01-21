@@ -8,11 +8,11 @@
  		if($_PUT["update"] != $_PUT["old"])
  		{
 	 		$id = $_PUT["id"];
-	 		$update = htmlspecialchars($_PUT["update"], ENT_QUOTES); 
+	 		$update = urlencode($_PUT["update"]); 
 	 		//on met cette valeur dans la bdd
-	 		$sql= 'UPDATE saisie SET libelle = \''.$update.'\' WHERE id ='.$id;
+	 		$requete = json_decode(file_get_contents($api.'todo/update/'.$id.'/'.$update));
 	 		// on revoie le bon code http
-	 		if($dbh->exec($sql))
+	 		if($requete == "1")
 	 		{
 	 			http_response_code(200);
 	 		}

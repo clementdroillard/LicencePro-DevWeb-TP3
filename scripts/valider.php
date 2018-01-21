@@ -7,11 +7,11 @@
  		$id = $_PUT["id"];
  		$valider = $_PUT["valider"];
  		//on change la valeur de la validation 
- 		$valider = (boolval(!$valider) ? 'true' : 'false');
+ 		$valider = (boolval(!$valider) ? 1 : 0);
  		//on met cette valeur dans la bdd
- 		$sql= 'UPDATE saisie SET valider = '.$valider.' WHERE id ='.$id;
+ 		$requete = json_decode(file_get_contents($api.'todo/valider/'.$id.'/'.$valider));
  		// on revoie le bon code http
- 		if($dbh->exec($sql))
+ 		if($requete == "1")
  		{
  			http_response_code(200);
  		}

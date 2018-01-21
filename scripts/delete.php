@@ -6,9 +6,9 @@
  	if(isset($_DELETE["del"]) && is_numeric($_DELETE["del"])){
  		$id = $_DELETE["del"];
  		//on supprime la saisie souhaitee
- 		$sql= 'DELETE FROM saisie WHERE id ='.$id;
+ 		$requete = json_decode(file_get_contents($api.'todo/delete/'.$id));
  		// on revoie le bon code http
- 		if($dbh->exec($sql)){
+ 		if($requete == "1"){
  			http_response_code(200);
  		}
  		else

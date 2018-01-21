@@ -1,5 +1,5 @@
  <?php
- 	//connexion a notre base de donnee
- 	$dbh = new PDO('mysql:host=localhost;dbname=TP3','root','rt2018');
+ 	//connexion a notre api
+ 	$api = 'http://127.0.0.1:8000/api/';
 
  ?>

@@ -5,22 +5,21 @@
  	if(isset($_POST["insert"]))
  	{
  		//contient la valeur qui vient d'etre saisie au format html
- 		$valeur =htmlspecialchars($_POST["insert"], ENT_QUOTES); 
+ 		$valeur = urlencode($_POST["insert"]); 
  		//insertion de la valeur dans la base
- 		$sql = 'INSERT INTO saisie(libelle,valider) VALUES(\''.$valeur.'\',false)';
+ 		$requete = json_decode(file_get_contents($api.'todo/insert/'.$valeur));
+ 		
  		// on revoie le bon code http
- 		if($dbh->exec($sql))
+ 		if($requete == "1")
  		{
  			http_response_code(200);
  			// on recupere l'id de l'insertion
- 			$id = $dbh->query('SELECT MAX(id) FROM saisie');
- 			foreach ($id as $value) {
- 				echo $value['MAX(id)'];
- 			}
+ 			$id = json_decode(file_get_contents($api.'todo/maxID'));
+ 			echo $id[0]->max;
  		}
  		else
  		{
- 			http_response_code(503);
+ 			//http_response_code(503);
  		}
  	}
  	else
